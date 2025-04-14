@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     ];
     
-    // Función para añadir mensaje al chat
     function addMessage(role, content) {
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${role}-message`;
@@ -18,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const messageContent = document.createElement('div');
         messageContent.className = 'message-content';
         
-        // Si el contenido incluye HTML (como el mensaje de bienvenida)
         if (content.startsWith('<')) {
             messageContent.innerHTML = content;
         } else {
@@ -40,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
     
-    // Función para mostrar indicador de "escribiendo"
     function showTypingIndicator() {
         const typingDiv = document.createElement('div');
         typingDiv.className = 'message bot-message typing-indicator';
@@ -50,7 +47,6 @@ document.addEventListener('DOMContentLoaded', function() {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
     
-    // Función para ocultar indicador de "escribiendo"
     function hideTypingIndicator() {
         const typingIndicator = document.getElementById('typing-indicator');
         if (typingIndicator) {
@@ -58,11 +54,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Función para enviar mensaje a DeepInfra
+
     async function sendToDeepInfra(userMessage) {
         showTypingIndicator();
         
-        // Añadir mensaje del usuario al historial
+      
         conversationHistory.push({
             role: "user",
             content: userMessage
@@ -86,7 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.choices && data.choices[0].message) {
                 const botResponse = data.choices[0].message.content;
                 
-                // Añadir respuesta al historial
                 conversationHistory.push({
                     role: "assistant",
                     content: botResponse
@@ -104,7 +99,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Event listeners
     sendButton.addEventListener('click', () => {
         const message = userInput.value.trim();
         if (message) {
