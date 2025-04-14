@@ -24,7 +24,7 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 20px;
-      padding-left: 320px; /* Espacio para el robot en desktop */
+      padding-left: 320px; 
       box-sizing: border-box;
       z-index: 1;
     }
@@ -81,13 +81,13 @@
     .header-text h1 {
       margin: 0;
       font-size: 1.5rem;
-      color: #2c3e50;
+      color: #000000;
     }
 
     .institution-name {
       margin: 5px 0 0;
       font-size: 0.9rem;
-      color: #7f8c8d;
+      color: #ffffff;
     }
 
     .chat-messages {
@@ -185,11 +185,10 @@
       color: #3b82f6;
     }
 
-    /* Estilos para móviles */
     @media (max-width: 768px) {
       .chat-container {
         padding: 15px;
-        padding-bottom: 80px; /* Espacio para el input */
+        padding-bottom: 80px; 
       }
 
       .robot-avatar {
@@ -208,7 +207,27 @@
       .message {
         max-width: 90%;
       }
+      .disclaimer {
+    padding: 8px 12px; 
+    margin-top: 10px;
+    font-size: 0.75rem; 
+    position: relative; 
+    z-index: 1;
+    background-color: rgba(248, 250, 252, 0.9); 
+  }
 
+  .chat-header {
+    background-color: #3b82f6; 
+    padding: 12px 15px;
+    border-radius: 0; 
+    margin-bottom: 10px;
+  }
+
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px; 
+  }
       .chat-input-container {
         position: fixed;
         bottom: 0;
