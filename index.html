@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asistente Virtual - Hospital Santa María de Cutervo</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background-image: url('https://static.vecteezy.com/system/resources/previews/002/058/254/non_2x/abstract-white-background-free-vector.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin: 0;
+      padding: 0;
+    }
+
+    .chat-container {
+      position: relative;
+      padding-left: 300px; 
+      z-index: 1;
+    }
+
+    .robot-avatar {
+      position: absolute;
+      top: 100px;
+      left: 5px;
+      width: 300px;
+      height: auto;
+      z-index: 0;
+      opacity: 0.95;
+      animation: float 3s ease-in-out infinite;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .chat-container {
+        padding-left: 0;
+      }
+      .robot-avatar {
+        display: none;
+      }
+    }
+    @media (max-width: 768px) {
+  .chat-container {
+    padding-left: 0;
+    padding: 10px;
+  }
+
+  .chat-messages {
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  .chat-input-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    padding: 10px;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+  }
+
+  .chat-input {
+    display: flex;
+    gap: 10px;
+  }
+
+  .chat-input input {
+    flex: 1;
+    font-size: 1em;
+  }
+
+  .chat-input button {
+    font-size: 1.2em;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <img
+      src="https://firebasestorage.googleapis.com/v0/b/cutriper-c8ec1.appspot.com/o/images%2Fbot_saludo.png?alt=media&token=4049ffaf-4936-47ac-abec-518b06cd6941"
+      alt="Robot Asistente"
+      class="robot-avatar"
+      id="robot-avatar"
+    />
+
+    <div class="chat-header">
+      <div class="header-content">
+        <div class="logo-container">
+          <img src="https://scontent.ftru2-1.fna.fbcdn.net/v/t39.30808-6/416204282_795190892645693_8159285119640206484_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=AfHRdTa9KfMQ7kNvwHCyJzn&_nc_oc=AdmY280w8fjJ98H4-QlsJgcsTVl7OV3v1JoFy5-lIDFx0Y20qH-g-ry9HPScLICrPzE&_nc_zt=23&_nc_ht=scontent.ftru2-1.fna&_nc_gid=IWpcxnwvZ5lRL1Gftn8idA&oh=00_AfHePpCbwhJXFCwBAlmbqRt8k2D4qZ16U0lKkycnHletOQ&oe=67F9B31B"
+               alt="Logo Hospital" class="logo" />
+        </div>
+        <div class="header-text">
+          <h1>Asistente Virtual</h1>
+          <p class="institution-name">Hospital Santa María de Cutervo</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-messages" id="chat-messages">
+      <div class="message bot-message welcome-message">
+        <div class="message-content">
+          <p>¡Bienvenido! Soy el asistente virtual del Hospital Santa María de Cutervo. ¿En qué puedo ayudarle hoy? Puedo responder sobre:</p>
+          <ul>
+            <li>Horarios de atención</li>
+            <li>Servicios médicos</li>
+            <li>Trámites hospitalarios</li>
+            <li>Información de contacto</li>
+          </ul>
+        </div>
+        <div class="message-time">Hoy, <span id="current-time"></span></div>
+      </div>
+    </div>
+
+    <div class="chat-input-container">
+      <div class="chat-input">
+        <input type="text" id="user-input" placeholder="Escriba su consulta sobre el hospital..." autocomplete="off" />
+        <button id="send-button" aria-label="Enviar mensaje">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      <p><i class="fas fa-info-circle"></i> Este asistente solo responde preguntas relacionadas con el hospital. Las respuestas son generadas por IA, considere verificar la información importante ya que el bot puede cometer errores.</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    document.getElementById('current-time').textContent = new Date().toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+
+    const robotImages = [
+      'https://firebasestorage.googleapis.com/v0/b/cutriper-c8ec1.appspot.com/o/images%2Fbot_mano.png?alt=media&token=2e93249f-5ec5-463f-90f3-8d5675652718',
+      'https://firebasestorage.googleapis.com/v0/b/cutriper-c8ec1.appspot.com/o/images%2Fbot_ruedas.png?alt=media&token=d8f554d1-3a2e-4ef0-86ca-8f63d4708c51',
+      'https://firebasestorage.googleapis.com/v0/b/cutriper-c8ec1.appspot.com/o/images%2Fbot_saludo.png?alt=media&token=a5a6fe9f-5e99-4fc3-9677-7654125ef30c'
+    ];
+    let robotIndex = 0;
+
+    const chatMessages = document.getElementById('chat-messages');
+    const robotAvatar = document.getElementById('robot-avatar');
+
+    const preloadedImages = [];
+    robotImages.forEach(url => {
+      const img = new Image();
+      img.src = url;
+      preloadedImages.push(img);
+    });
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (
+            node.nodeType === 1 &&
+            node.classList.contains('message') &&
+            node.classList.contains('bot-message') &&
+            !node.classList.contains('welcome-message')
+          ) {
+            robotIndex = (robotIndex + 1) % robotImages.length;
+            robotAvatar.style.opacity = 0;
+            setTimeout(() => {
+              robotAvatar.src = robotImages[robotIndex];
+              robotAvatar.style.opacity = 0.95;
+            }, 200);
+          }
+        });
+      });
+    });
+
+    observer.observe(chatMessages, { childList: true });
+  </script>
+</body>
+</html>
