@@ -73,38 +73,69 @@ Cuando te pidan información reciente sobre el hospital, pasales el siguiente li
 Si te piden información sobre demora de citas, diles que el hospital atiende de acuerdo a la orden de llegada al establecimiento, y que la demora depende de la cantidad de pacientes que se encuentren en el establecimiento.
 `;
 
-  const messages = [
+
+const geminiApiKeys = [
+  'AIzaSyDy53xb9girP3Ug9r73-EWmqL4VKTkXv3E',
+  'AIzaSyC_lgL8Pay8VdQUIn_FknqCbh3ZvNf7G-8',
+  'AIzaSyCHx-U9AGedJv5XcdRzW7NiqjxnaaVf2Ns',
+  // Añade más keys según necesites
+];
+const selectedApiKey = geminiApiKeys[Math.floor(Math.random() * geminiApiKeys.length)];
+try {
+  // Formatear mensajes para Gemini (que usa un formato ligeramente diferente)
+  const formattedMessages = [
     {
-      role: 'system',
-      content: process.env.SYSTEM_PROMPT || defaultPrompt
+      role: 'user',
+      parts: [{ text: defaultPrompt }]
     },
-    ...userMessages
+    ...userMessages.map(msg => ({
+      role: msg.role === 'assistant' ? 'model' : 'user',
+      parts: [{ text: msg.content }]
+    }))
   ];
 
-  try {
-    const response = await fetch('https://api.deepinfra.com/v1/openai/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer S2XtYQ8aWir8JvaX6nOwgYaUkMiVn9jr' 
-      },
-      body: JSON.stringify({
-        model: 'meta-llama/Meta-Llama-3.1-8B-Instruct',
-        messages: messages,
+  const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${selectedApiKey}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      contents: formattedMessages,
+      generationConfig: {
         temperature: 0.7,
-        max_tokens: 500
-      })
-    });
+        maxOutputTokens: 500
+      }
+    })
+  });
 
-    const data = await response.json();
-    return {
-      statusCode: 200,
-      body: JSON.stringify(data)
-    };
-  } catch (err) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: 'API error', details: err.message })
-    };
+  if (!response.ok) {
+    throw new Error(`Error HTTP: ${response.status}`);
   }
+
+  const data = await response.json();
+  
+  // Extraer la respuesta de Gemini
+  const botResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || 
+                     'No pude generar una respuesta. Por favor, intenta de nuevo.';
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      choices: [{
+        message: {
+          content: botResponse
+        }
+      }]
+    })
+  };
+} catch (err) {
+  console.error('Error calling Gemini API:', err);
+  return {
+    statusCode: 500,
+    body: JSON.stringify({ 
+      error: 'Error al contactar el servicio de IA',
+      details: err.message 
+    })
+  };
+}
 }

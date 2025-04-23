@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
             content: document.querySelector('.welcome-message .message-content').innerHTML
         }
     ];
-    
     function addMessage(role, content) {
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${role}-message`;
@@ -54,10 +53,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-
     async function sendToDeepInfra(userMessage) {
         showTypingIndicator();
-        
       
         conversationHistory.push({
             role: "user",
