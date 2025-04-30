@@ -18,6 +18,81 @@
       font-family: 'Roboto', sans-serif;
       min-height: 100vh;
     }
+    .robot-name {
+    position: absolute;
+    top: 40px;  /* Más separado de la imagen */
+    left: 5%;
+    transform: translateX(-50%);
+    width: auto;
+    padding: 10px 25px;
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 800;
+    font-family: 'Arial Black', 'Impact', sans-serif;
+    color: #ff0000;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2),
+               0 0 0 4px #ff0000,
+               0 0 0 6px white;
+    z-index: 10;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    animation: float 3s ease-in-out infinite;
+    white-space: nowrap;
+  }
+
+  /* Estilo para móvil */
+  .robot-name-mobile {
+    display: none;
+    margin: 0 auto 15px;
+    padding: 8px 20px;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 800;
+    font-family: 'Arial Black', 'Impact', sans-serif;
+    color: #ff0000;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2),
+               0 0 0 3px #ff0000,
+               0 0 0 5px white;
+    z-index: 10;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translate(-50%, 0);
+    }
+    50% {
+      transform: translate(-50%, -10px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .robot-name {
+      display: none;
+    }
+    
+    .robot-name-mobile {
+      display: block;
+    }
+  }
+  .robot-name::before {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  background-color: #ff0000;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+}
 
     .chat-container {
       position: relative;
@@ -270,7 +345,7 @@
       class="robot-avatar"
       id="robot-avatar"
     />
-
+    <div class="robot-name">Sammy</div>
     <!-- Robot para móvil (se mostrará solo en móviles) -->
     <img
       src="https://firebasestorage.googleapis.com/v0/b/cutriper-c8ec1.appspot.com/o/images%2Fbot_saludo.png?alt=media&token=4049ffaf-4936-47ac-abec-518b06cd6941"
@@ -278,7 +353,8 @@
       class="robot-avatar-mobile"
       id="robot-avatar-mobile"
     />
-
+    
+    <div class="robot-name-mobile">Sammy</div>
     <div class="chat-header">
       <div class="header-content">
         <div class="logo-container">

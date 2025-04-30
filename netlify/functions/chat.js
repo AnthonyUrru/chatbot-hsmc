@@ -78,11 +78,10 @@ const geminiApiKeys = [
   'AIzaSyDy53xb9girP3Ug9r73-EWmqL4VKTkXv3E',
   'AIzaSyC_lgL8Pay8VdQUIn_FknqCbh3ZvNf7G-8',
   'AIzaSyCHx-U9AGedJv5XcdRzW7NiqjxnaaVf2Ns',
-  // Añade más keys según necesites
 ];
 const selectedApiKey = geminiApiKeys[Math.floor(Math.random() * geminiApiKeys.length)];
+//Llamar petición a Gemini 1.5 Flash 
 try {
-  // Formatear mensajes para Gemini (que usa un formato ligeramente diferente)
   const formattedMessages = [
     {
       role: 'user',
