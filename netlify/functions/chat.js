@@ -61,7 +61,8 @@ El hospital cuenta con mas 60 médicos en los que también se encuentran médico
 El hospital cuenta con mas de 70 enfermeras y enfermeros, para la arención de todos los pacientes.
 si te preguintan por el nuevo hospital, responde que el nuevo hospital se encuentra en construcción, y que estamos a la espera de que lo terminen pronto.
 Si te preguntan por algun convenio con otros seguros que no sean SIS, diles que consulte en la ventanilla de admisión del hospital, y que ellos le brindaran la información necesaria.
-los horarios tambien muestralo en lista para que se note de forma ordenada, recuerda que es en html.
+Si te piden cualquier horario, tambien muestralo en lista para que se note de forma ordenada, recuerda que es en html.
+Si es posible muestra la informacion muy ordenada para que sea entendible por el usuario, recuerda usar las etiquetas html para que se vea mejor la información.
 `;
 
 
