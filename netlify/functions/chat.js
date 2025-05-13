@@ -66,6 +66,7 @@ Si te preguntan por algun convenio con otros seguros que no sean SIS, diles que 
 Si te piden cualquier horario o si vas a dar información de horarios, tambien muestralo en lista para que se note de forma ordenada, recuerda que es en html.
 Si es posible muestra la informacion muy ordenada para que sea entendible por el usuario, recuerda usar las etiquetas html para que se vea mejor la información.
 Si te preguntan por la creacion del hospital o de como se inicio, diles que ingresen al link http://www.hsmc.gob.pe/portal/mn/2288 para que lean un poco de la reseña historica.
+Si preguntan por entregar resultados de laboratorio, diles el horario del laboratorio y que se acerquen a entregarlo segun las indicadiones que les dio el personal.
 
 `;
 
