@@ -233,24 +233,55 @@ body {
 }
 
 @media (max-width: 768px) {
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+  
+    body {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+  
     .chat-container {
-        height: 100vh;
-        max-height: none;
-        border-radius: 0;
+      width: 100vw;
+      height: 100vh;
+      max-height: none;
+      border-radius: 0;
     }
+  
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      height: calc(100vh - 200px);
+      padding: 15px;
+    }
+  
+    .chat-input-container {
+      padding: 10px;
+      position: sticky;
+      bottom: 0;
+      background-color: var(--white);
+      z-index: 10;
+      border-top: 1px solid #ccc;
+    }
+  
+    .chat-input {
+      flex-direction: row;
+    }
+  
+    .chat-input input {
+      padding: 10px 15px;
+      font-size: 1rem;
+    }
+  
+    .chat-input button {
+      padding: 10px 20px;
+      font-size: 1rem;
+    }  
     
-    .header-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-    }
-    
-    .logo {
-        width: 70px;
-        height: 70px;
-    }
-    
-    .message {
-        max-width: 90%;
-    }
 }
